@@ -1,6 +1,14 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { IItem } from '../model/item';
-import { Observable, of } from 'rxjs';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { IItem } from '../shared/model/item';
+import { Observable } from 'rxjs';
+import { LocalStorageService } from '../shared/services/local-storage.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-surface',
@@ -10,17 +18,38 @@ import { Observable, of } from 'rxjs';
 })
 export class SurfaceComponent implements OnInit {
   public items: Observable<IItem[]> | undefined;
+  @ViewChild('input', { static: false })
+  set input(element: ElementRef<HTMLInputElement>) {
+    if (element) {
+      element.nativeElement.focus();
+    }
+  }
+
+  constructor(private localStorageService: LocalStorageService) {}
 
   ngOnInit() {
-    this.items = of([
-      {
-        id: '1623c069-6922-41d5-9779-4584a50c6086',
-        note: `Make sure you do the thing. Remember to mention this specific thing and don't forgot to ask about how to do the task which involves stuff about other stuff.`,
-      },
-      {
-        id: 'dee8606a-b55e-4c8a-a6e2-1bb53c10b4ed',
-        note: `Speak to that person about that thing`,
-      },
-    ]);
+    this.getAllActive();
+  }
+
+  add(note: string) {
+    this.localStorageService.create({
+      id: uuidv4(),
+      note: note,
+    } as IItem);
+    this.getAllActive();
+  }
+
+  dismiss(item: IItem) {
+    this.localStorageService.delete(item);
+    this.items = this.localStorageService.list();
+  }
+
+  getAllActive() {
+    this.items = this.localStorageService.list();
+  }
+
+  onCtrlEnter(note: ElementRef<HTMLInputElement> | any) {
+    this.add(note.value);
+    note.value = '';
   }
 }

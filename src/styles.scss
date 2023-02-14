@@ -13,3 +13,14 @@ body {
 body {
   background-color: #1d2022;
 }
+
+// MATERIAL OVERRIDES
+
+app-surface {
+  .mat-mdc-form-field-hint-wrapper {
+    padding: 0;
+    mat-hint {
+      color: #eee;
+    }
+  }
+}

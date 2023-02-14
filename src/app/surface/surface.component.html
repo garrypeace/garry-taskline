@@ -1,5 +1,16 @@
 <div class="container">
-  <app-item *ngFor="let item of items | async" [item]="item"></app-item>
-</div>
+  <app-item
+    *ngFor="let item of items | async"
+    [item]="item"
+    (removeItemEvent)="dismiss(item)"
+  ></app-item>
 
-<button mat-button color="primary">do thing</button>
+  <mat-form-field class="example-full-width">
+    <textarea
+      matInput
+      #input
+      (keydown.control.enter)="onCtrlEnter(input)"
+    ></textarea>
+    <mat-hint>CTRL-Enter to save. </mat-hint>
+  </mat-form-field>
+</div>

@@ -1,5 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { IItem } from '../model/item';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { IItem } from '../shared/model/item';
 
 @Component({
   selector: 'app-item',
@@ -9,4 +15,9 @@ import { IItem } from '../model/item';
 })
 export class ItemComponent {
   @Input() item: IItem | undefined;
+  @Output() removeItemEvent = new EventEmitter<string>();
+
+  dismiss(value: any) {
+    this.removeItemEvent.emit(value);
+  }
 }

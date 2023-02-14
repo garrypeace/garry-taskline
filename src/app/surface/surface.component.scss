@@ -5,5 +5,10 @@
 
   .container {
     width: 300px;
+
+    mat-form-field {
+      padding: 0;
+      width: 100%;
+    }
   }
 }
