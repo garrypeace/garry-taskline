@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+
+  .container {
+    width: 300px;
+  }
+}
