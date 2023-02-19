@@ -2,9 +2,6 @@
 
 html,
 body {
-  height: 100%;
-}
-body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   padding: 10px;
@@ -22,5 +19,11 @@ app-surface {
     mat-hint {
       color: #eee;
     }
+  }
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  .mat-mdc-form-field-focus-overlay {
+    background-color: rgba(255, 255, 255, 0.1);
   }
 }

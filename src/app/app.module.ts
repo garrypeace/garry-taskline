@@ -7,11 +7,26 @@ import { SurfaceComponent } from './surface/surface.component';
 import { ItemComponent } from './item/item.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AutofocusDirective } from './shared/directives/autofocus/autofocus.directive';
+import { HeaderComponent } from './header/header.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { PostponeChoiceComponent } from './postpone-choice/postpone-choice.component';
 
 @NgModule({
-  declarations: [AppComponent, SurfaceComponent, ItemComponent],
+  declarations: [
+    AppComponent,
+    SurfaceComponent,
+    ItemComponent,
+    AutofocusDirective,
+    HeaderComponent,
+    PostponeChoiceComponent,
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -19,8 +34,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     MatButtonModule,
     MatInputModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatButtonToggleModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}

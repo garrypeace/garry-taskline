@@ -1,0 +1,8 @@
+<mat-button-toggle-group>
+  <mat-button-toggle
+    *ngFor="let choice of choices"
+    value="{{ choice.value }}"
+    (click)="makeChoice(choice.value)"
+    >{{ choice.label }}</mat-button-toggle
+  >
+</mat-button-toggle-group>

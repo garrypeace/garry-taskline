@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="container">
   <app-item
     *ngFor="let item of items | async"
@@ -7,10 +8,15 @@
 
   <mat-form-field class="example-full-width">
     <textarea
+      id="add"
       matInput
       #input
+      appAutofocus
       (keydown.control.enter)="onCtrlEnter(input)"
+      [placeholder]="'Add something...'"
     ></textarea>
-    <mat-hint>CTRL-Enter to save. </mat-hint>
+    <mat-hint *ngIf="input.value.trim().length > 0"
+      >CTRL-Enter to save.
+    </mat-hint>
   </mat-form-field>
 </div>

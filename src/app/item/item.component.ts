@@ -1,3 +1,6 @@
+import { ItemsService } from './../shared/services/items.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PostponeChoiceComponent } from './../postpone-choice/postpone-choice.component';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,10 +17,21 @@ import { IItem } from '../shared/model/item';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemComponent {
-  @Input() item: IItem | undefined;
+  constructor(public dialog: MatDialog, private itemsService: ItemsService) {}
+
+  @Input() item!: IItem;
   @Output() removeItemEvent = new EventEmitter<string>();
 
   dismiss(value: any) {
     this.removeItemEvent.emit(value);
+  }
+
+  open() {
+    const dialogRef = this.dialog.open(PostponeChoiceComponent);
+
+    dialogRef.afterClosed().subscribe((addon: number) => {
+      this.item.reminderDate = Date.now() + addon;
+      this.itemsService.update(this.item);
+    });
   }
 }
